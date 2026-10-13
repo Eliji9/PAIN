@@ -19,16 +19,12 @@ define view entity ZR_ARCHIVOS_PAGO_ITEMS
     and $projection.Identificador = _TotPago.Identificador
     and $projection.Sociedad      = _TotPago.Sociedad
     and $projection.AccDocument   = _TotPago.AccDocument
-    and $projection.Ejercicio     = _TotPago.Ejercicio
 {
   key cast( identificador as farp_laufi preserving type )   as Identificador,
   key fecha                                                 as Fecha,
   key cast( sociedad as farp_dzbukr preserving type )       as Sociedad,
   key cast( substring( documento_pago, 5, 10 )
             as farp_vblnr preserving type )                 as AccDocument,
-
-      // documento_pago = BUKRS(4) + BELNR(10) + GJAHR(4)
-      cast( substring( documento_pago, 15, 4 ) as gjahr )   as Ejercicio,
 
       // ------------------------------------------------------------------
       // >>> CONSERVAR AQUÍ los campos de tu versión actual (línea 31 en

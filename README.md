@@ -17,17 +17,13 @@ liberada `I_PaymentProposalItem` (sin acceso directo a REGUP):
 | Objeto | Cambio |
 |---|---|
 | `ZI_ARCH_PAGO_AGRUP_POS` | **Nuevo.** Una fila por factura con `sum()` del importe |
-| `ZR_ARCHIVOS_PAGO_ITEMS` | Quita `_Regup` / `_Regu`, agrega `_TotPago` y el campo `Ejercicio` |
+| `ZR_ARCHIVOS_PAGO_ITEMS` | Quita `_Regup` / `_Regu`, agrega `_TotPago` (sin condición por ejercicio) |
 | `ZC_ARCHIVOS_PAGO_ITEMS` | Lee moneda, monto, referencia y acreedor desde `_TotPago`; quita `_base` |
 
 ## Antes de activar
 
 1. `ZI_ARCH_PAGO_AGRUP_POS` ya está activa en DS4.
-2. En `ZR_ARCHIVOS_PAGO_ITEMS`, el campo `Ejercicio` debe existir en la lista de
-   campos; si no, la asociación falla con *Expression "$projection.Ejercicio" cannot be used*.
-3. En `ZR_ARCHIVOS_PAGO_ITEMS`, conserva tus campos desde la línea 31 donde
+2. En `ZR_ARCHIVOS_PAGO_ITEMS`, conserva tus campos desde la línea 31 donde
    indica el comentario `>>> CONSERVAR AQUÍ`.
-4. Si el BDEF es managed y reclama por `Ejercicio`, agrega
-   `field ( readonly ) Ejercicio;`.
 
-Orden de activación: **ZI → ZR → BDEF (si aplica) → ZC**.
+Orden de activación: **ZI → ZR → ZC**.
