@@ -5,10 +5,10 @@
   programa de pagos. Agrega las N posiciones de I_PaymentProposalItem
   (REGUP) para evitar la multiplicación de filas en ZR_ARCHIVOS_PAGO_ITEMS.
 
-  Campos marcados con  // VERIFICAR  : nombre no confirmado en DS4.
+  Campos marcados con
   Valídalos con F2 sobre I_PaymentProposalItem antes de activar.
 */
-define view entity ZI_ARCH_PAGO_REGUP_TOT
+define view entity ZI_ARCH_PAGO_AGRUP_POS
   as select from I_PaymentProposalItem
 
   association [0..1] to I_Supplier as _Supplier
@@ -18,14 +18,14 @@ define view entity ZI_ARCH_PAGO_REGUP_TOT
   key PaymentRunID                  as Identificador,
   key CompanyCode                   as Sociedad,
   key AccountingDocument            as AccDocument,
-  key FiscalYear                    as Ejercicio,      // VERIFICAR (REGUP-GJAHR)
-      PaymentDocument               as DocumentoPago,  // VERIFICAR (REGUP-VBLNR)
+  key FiscalYear                    as Ejercicio,
+      PaymentDocument               as DocumentoPago,
       Supplier                      as Proveedor,
       DocumentReferenceID           as Referencia,
       PaymentCurrency               as Moneda,
 
       @Semantics.amount.currencyCode: 'Moneda'
-      sum( case DebitCreditCode                        // VERIFICAR (REGUP-SHKZG)
+      sum( case DebitCreditCode
              when 'H' then NetAmountInTransacCurrency
              else NetAmountInTransacCurrency * -1
            end )                    as ImportePago,

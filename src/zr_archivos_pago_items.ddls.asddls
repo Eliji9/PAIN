@@ -14,7 +14,7 @@ define view entity ZR_ARCHIVOS_PAGO_ITEMS
 
   // Reemplaza _Regup (regup) y _Regu (I_PaymentProposalItem):
   // una sola fila por factura, con el importe ya sumado.
-  association [0..1] to ZI_ARCH_PAGO_REGUP_TOT as _TotPago
+  association [0..1] to ZI_ARCH_PAGO_AGRUP_POS as _TotPago
     on  $projection.Fecha         = _TotPago.Fecha
     and $projection.Identificador = _TotPago.Identificador
     and $projection.Sociedad      = _TotPago.Sociedad
